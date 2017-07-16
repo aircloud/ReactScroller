@@ -28,7 +28,7 @@ class ReactScroller extends Component{
     render(){
         return(
             <ReactScrollerCore maxScroll={0} container="#ReactScrollerCoreContainer" target="#ReactScrollerCoretarget"
-                          lowerBound={50}
+                          lowerBound={this.props.lowerBound || 50}
                           showRefreshTip = {() => {
                               this.props.showRefreshTip();
                           }}
@@ -41,7 +41,7 @@ class ReactScroller extends Component{
                               this.props.loadmore();
                           }}
             >
-                <div id="ReactScrollerCoreContainer" style={{height:this.props.containerHeight}}>
+                <div id="ReactScrollerCoreContainer" style={{height:this.props.containerHeight,width:this.props.containerWidth||"100%"}}>
                     <div id="ReactScrollerCoretarget" className="ReactScollerTarget">
                         <div className={this.props.showRefresh?"refreshShow":"refreshHide"}>{this.props.refreshTip}</div>
                         {this.props.children}

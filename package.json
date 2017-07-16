@@ -1,6 +1,6 @@
 {
   "name": "reactscroller",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An universal scroll component for React",
   "main": "index.js",
   "scripts": {
