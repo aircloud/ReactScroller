@@ -1,5 +1,5 @@
 <p align="center">
-<span style="font-size:24px;font-weight:600;color:#0c60aa">ReactScroller</span><span style="color:#1c70ae">beta</span>
+<img src="https://www.10000h.top/images/data_img/reactscroller.png"/>
 </p>
 <p align="center">
 <span style="font-size:16px;">An universal scroll component for React</span>
