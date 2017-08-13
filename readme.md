@@ -36,12 +36,12 @@ You can visit [ReactScrollerExample](https://github.com/aircloud/ReactScrollerEx
 | containerHeight | Necessary | null | The height for the outer container to scroll | String \| Number |
 | containerWidth  | Optional | 100% | The width for the outer container to scroll |String \| Number |
 | refresh | Optional | null | The function for pull down to refresh | Function |
-| loadmore | Optional | null | The function for scroll up to load more | Function |
+| loadMore | Optional | null | The function for scroll up to load more | Function |
 | lowerBound | Optional | 50 | The distance to the bottom when trigger the function loadmore | Number |
 | refreshTip | Necessary | null | The refreshTip for the different stages of refreshing(a property of `this.state` is better. It should be changed) | String or Component |
 | loadMoreTip | Necessary | null | The loadmoreTip for the different stages of loading more (a property of `this.state` is better. It should be changed) | String or Component |
 | showRefresh | Necessary | null | Whether the refreshTip should be displayed | bool |
-| showLoadmore | Necessary | null | Whether the loadMoreTip should be displayed | bool |
+| showLoadMore | Necessary | null | Whether the loadMoreTip should be displayed | bool |
 
 ## Advanced
 

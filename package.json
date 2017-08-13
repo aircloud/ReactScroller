@@ -1,11 +1,12 @@
 {
   "name": "reactscroller",
-  "version": "0.0.3",
+  "version": "0.1.2",
   "description": "An universal scroll component for React",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/rimraf lib && ./node_modules/.bin/babel src --copy-files --source-maps --extensions .es6,.es,.jsx --out-dir lib"
+    "build": "./node_modules/.bin/rimraf lib && ./node_modules/.bin/babel src --copy-files --source-maps --extensions .es6,.es,.jsx --out-dir lib",
+    "quick": "./node_modules/.bin/rimraf lib && ./node_modules/.bin/babel src --copy-files --source-maps --extensions .es6,.es,.jsx --out-dir lib && npm publish"
   },
   "repository": {
     "type": "git",

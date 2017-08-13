@@ -1,7 +1,7 @@
 /**
  * Created by Xiaotao.Nie on 08/07/2017.
  * All right reserved
- * IF you have any question please email iconie@tencent.com
+ * IF you have any question please email onlythen@yeah.net
  */
 
 // 目前只支持纵向滚动,并没有对横向滚动的支持
@@ -44,11 +44,13 @@ class CommonScroll extends Component {
             y1: 0,
             heightForShowRefresh: 35,
             needRefresh: false,
+            stopResponse:false,
         };
     }
 
     static constructTransformForY(number) {
         return "translateY(" + number + "px)";
+
     }
     // 提供一个默认的减速函数
     static easeSmooth(x0, dt, friction) {
@@ -72,6 +74,7 @@ class CommonScroll extends Component {
     handleTouchStart(e) {
         // 重置needRefresh
         this.needRefresh = false;
+        this.CommonScrollConfig.stopResponse = false;
 
         // 如果这里阻止默认事件可能会出现原正常效果没有办法响应
         // e.preventDefault();
@@ -95,6 +98,8 @@ class CommonScroll extends Component {
     }
     handleTouchMove(e) {
         e.preventDefault();
+
+        if(this.CommonScrollConfig.stopResponse) return;
 
         this.CommonScrollConfig.currentY = e.touches[0].pageY;
         this.CommonScrollConfig.currentX = e.touches[0].pageX;
@@ -151,15 +156,19 @@ class CommonScroll extends Component {
                 this.CommonScrollConfig.translateY += (this.CommonScrollConfig.currentY - this.CommonScrollConfig.lastCurrentY);
                 this.CommonScrollConfig.target.style.transform = CommonScroll.constructTransformForY(this.CommonScrollConfig.translateY);
             }
-
             this.CommonScrollConfig.lastCurrentY = this.CommonScrollConfig.currentY;
         }
 
         if (this.CommonScrollConfig.translateY < minScroll + this.props.lowerBound) {
             this.props.onLowerArrive();
+            if(this.props.showLoadMore) {
+                this.CommonScrollConfig.stopResponse = true;
+            }
         }
     }
     handleTouchEnd(e) {
+        // e.preventDefault();
+
         this.CommonScrollConfig.currentY = e.changedTouches[0].pageY;
 
         if (this.needRefresh) {
@@ -226,6 +235,9 @@ class CommonScroll extends Component {
         let lastTime = new Date().getTime();
 
         const frame = function () {
+
+            // if(this.CommonScrollConfig.stopResponse) return;
+
             const time = new Date().getTime() - lastTime;
             const dt = (time + lastTime) - goBeginTime;
             const frameDistance = Math.ceil(speed * time) * this.CommonScrollConfig.direction;
@@ -241,14 +253,16 @@ class CommonScroll extends Component {
             ) {
                 speed = ease(speed0, dt, 0.2);
             } else {
-                speed = ease(speed0, dt, 0.0005);
+                speed = ease(speed0, dt, 0.0006);
             }
-
             lastTime = new Date().getTime();
             const minScroll = parseInt((this.CommonScrollConfig.container.offsetHeight - this.CommonScrollConfig.target.scrollHeight), 10);
 
             if (this.CommonScrollConfig.translateY < minScroll + this.props.lowerBound) {
                 this.props.onLowerArrive();
+                if(this.props.showLoadMore) {
+                    this.CommonScrollConfig.stopResponse = true;
+                }
             }
 
             if (speed >= MINSPEED) {
@@ -270,6 +284,7 @@ class CommonScroll extends Component {
             <div ref="CommonScrollContainer"
                  id="CommonScrollContainer"
                  style={{width:this.props.width||"100%"}}
+                 onClick={()=>{console.log("CommonScrollContainer");}}
             >
                 {this.props.children}
             </div>
